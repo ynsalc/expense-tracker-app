@@ -1,6 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { login } from "firebase.js";
 
 const Login = () => {
+  const navigate = useNavigate();
+  const [userData, setUserData] = useState({
+    email: "",
+    password: ""
+  });
+
+  const handleChange = (e) => {
+    setUserData({
+      ...userData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async () => {
+    const response = await login(userData.email, userData.password);
+    if(response){
+      navigate("/");
+    }
+  };
   return (
     <div className="min-h-screen flex flex-col">
       <div className="max-w-sm mx-auto flex-1 flex flex-col items-center justify-center px-2">
@@ -11,6 +32,8 @@ const Login = () => {
             className="block border border-grey-light w-full p-3 rounded mb-4"
             name="email"
             placeholder="Email"
+            value={userData.email}
+            onChange={handleChange}
           />
 
           <input
@@ -18,11 +41,14 @@ const Login = () => {
             className="block border border-grey-light w-full p-3 rounded mb-4"
             name="password"
             placeholder="Password"
+            value={userData.password}
+            onChange={handleChange}
           />
 
           <button
             type="submit"
             className="w-full text-center py-3 rounded bg-full-layer text-white hover:bg-second-box-color focus:outline-none my-1 mt-5"
+            onClick={handleSubmit}
           >
             Sign In to Account
           </button>

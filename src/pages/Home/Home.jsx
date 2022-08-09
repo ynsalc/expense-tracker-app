@@ -24,7 +24,7 @@ const Home = () => {
         <TotalCountBox title="Balance" count="9000" ml={true} color="blue" />
       </div>
       <div className="flex mt-5">
-        <div className="bg-full-layer p-[1.3rem] text-white rounded-lg">
+        <div className="bg-full-layer p-[1.1rem] text-white rounded-lg">
           <DoughnutChart />
         </div>
         <div className="bg-full-layer justify-end p-4 text-white rounded-lg ml-4 w-full">
