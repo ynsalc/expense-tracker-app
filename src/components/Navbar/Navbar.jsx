@@ -1,8 +1,11 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { BsArrowLeft, BsSearch } from "react-icons/bs";
 
 const Navbar = () => {
+  const { user } = useSelector((state) => state.auth);
+  console.log(user);
   const location = useLocation();
   const { pathname } = location;
   const homeControl = pathname === "/" ? true : false;
