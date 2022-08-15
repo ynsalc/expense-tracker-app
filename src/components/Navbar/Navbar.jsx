@@ -1,11 +1,16 @@
 import React from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { BsArrowLeft, BsSearch } from "react-icons/bs";
+import { logout } from "firebase.js";
 
 const Navbar = () => {
   const { user } = useSelector((state) => state.auth);
-  console.log(user);
+  const navigate = useNavigate();
+  const handleLogout = () => {
+    logout();
+    navigate("/login");
+  }
   const location = useLocation();
   const { pathname } = location;
   const homeControl = pathname === "/" ? true : false;
@@ -22,11 +27,11 @@ const Navbar = () => {
         </div>
       )}
       <div className="flex items-center">
-        <img
-          className="ml-4 w-10 h-10 rounded-full"
-          src="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
-          alt="Rounded avatar"
-        />
+        {user && (
+          <button className="p-2 bg-green-600 text-white rounded-lg" onClick={handleLogout}>
+            Logout
+          </button>
+        )}
       </div>
     </div>
   );

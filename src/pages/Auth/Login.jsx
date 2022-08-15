@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { login } from "firebase.js";
 
 const Login = () => {
   const navigate = useNavigate();
   const [userData, setUserData] = useState({
     email: "",
-    password: ""
+    password: "",
   });
 
   const handleChange = (e) => {
@@ -18,7 +18,7 @@ const Login = () => {
 
   const handleSubmit = async () => {
     const response = await login(userData.email, userData.password);
-    if(response){
+    if (response) {
       navigate("/");
     }
   };
@@ -52,6 +52,12 @@ const Login = () => {
           >
             Sign In to Account
           </button>
+          <p className="text-white text-sm text-center mt-3">
+            If you haven't registered
+          </p>
+          <p className="text-center py-3 rounded bg-full-layer text-white hover:bg-second-box-color focus:outline-none my-1 mt-5">
+            <Link to="/register">Register</Link>
+          </p>
         </div>
       </div>
     </div>
